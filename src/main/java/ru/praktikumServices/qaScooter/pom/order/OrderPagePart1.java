@@ -1,4 +1,4 @@
-package ru.praktikumServices.qaScooter.POM.order;
+package ru.praktikumServices.qaScooter.pom.order;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

@@ -8,14 +8,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.praktikumServices.qaScooter.POM.main.MainPage;
-import ru.praktikumServices.qaScooter.POM.order.OrderPagePart1;
-import ru.praktikumServices.qaScooter.POM.order.OrderPagePart2;
+import ru.praktikumServices.qaScooter.pom.BaseTest;
+import ru.praktikumServices.qaScooter.pom.main.MainPage;
+import ru.praktikumServices.qaScooter.pom.order.OrderPagePart1;
+import ru.praktikumServices.qaScooter.pom.order.OrderPagePart2;
 
 @RunWith(Parameterized.class)
-public class TestOrder {
-    private WebDriver driver;
+public class TestOrder extends BaseTest {
     private final String firstName;
     private final String secondName;
     private final String address;
@@ -48,21 +47,8 @@ public class TestOrder {
         };
     }
 
-
-    @Before
-    public void startUp() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    /*public void startUp() {
-        WebDriverManager.firefoxdriver().setup();
-    }*/
-
     @Test
     public void testOfOrder() {
-        driver = new ChromeDriver();
-        //driver = new FirefoxDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
         MainPage objMainPage = new MainPage(driver);
         OrderPagePart1 objPagePart1 = new OrderPagePart1(driver);
         OrderPagePart2 objOrderPart2 = new OrderPagePart2(driver);
@@ -76,10 +62,5 @@ public class TestOrder {
         objOrderPart2.setComment(comment);
         objOrderPart2.confirmOrder();
         objOrderPart2.checkSuccessWindow();
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 }

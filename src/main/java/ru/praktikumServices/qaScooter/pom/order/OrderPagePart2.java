@@ -1,4 +1,4 @@
-package ru.praktikumServices.qaScooter.POM.order;
+package ru.praktikumServices.qaScooter.pom.order;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -36,9 +36,9 @@ public class OrderPagePart2 {
     }
 
     public void chooseCheckBox(String colorOfScooter) {
-        if(colorOfScooter == "чёрный жемчуг") {
+        if(colorOfScooter.equals("чёрный жемчуг")) {
             driver.findElement(checkboxBlack).click();
-        } else if (colorOfScooter == "серая безысходность") {
+        } else if (colorOfScooter.equals("серая безысходность")) {
             driver.findElement(checkboxGrey).click();
         } else {
             driver.findElement(checkboxBlack).click();

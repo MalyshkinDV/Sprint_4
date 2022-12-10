@@ -6,15 +6,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.praktikumServices.qaScooter.POM.main.AccordionPage;
+import ru.praktikumServices.qaScooter.pom.BaseTest;
+import ru.praktikumServices.qaScooter.pom.main.MainPage;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class TestAccordion {
-    private WebDriver driver;
+public class TestAccordion extends BaseTest {
     private final int indexQuestion;
     private final int indexAnswer;
     private final String expectedTextAnswer;
@@ -39,30 +38,13 @@ public class TestAccordion {
         };
     }
 
-    @Before
-    public void startUp() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    /*public void startUp() {
-        WebDriverManager.firefoxdriver().setup();
-    }*/
-
     @Test
     public void testListOfQuestions() {
-        driver = new ChromeDriver();
-        //driver = new FirefoxDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/"); // открыли сайт
-        AccordionPage objAccordionPage = new AccordionPage(driver);
-        objAccordionPage.clickButtonAcceptCookies();
-        objAccordionPage.scrollToImportantQuestions();
-        objAccordionPage.waitButtonForQuestions();
-        objAccordionPage.clickButtonForQuestions(indexQuestion);
-        assertEquals("Ошибка, не соответствие требованиям!", expectedTextAnswer, objAccordionPage.getTextAnswers(indexAnswer));
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
+        MainPage objMainPage = new MainPage(driver);
+        objMainPage.clickButtonAcceptCookies();
+        objMainPage.scrollToElementForScroll();
+        objMainPage.waitButtonForQuestions();
+        objMainPage.clickButtonForQuestions(indexQuestion);
+        assertEquals("Ошибка, не соответствие требованиям!", expectedTextAnswer, objMainPage.getTextAnswers(indexAnswer));
     }
 }
